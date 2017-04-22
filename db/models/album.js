@@ -1,12 +1,11 @@
-// var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
-// mongoose.connect('mongodb://127.0.0.1:27017/vinylTunes');
-// var db = mongoose.connection;
+var albumSchema = mongoose.Schema({
+  title: String,
+  artist: String,
+  year: Number,
+  have: Boolean
+});
 
-// db.on('error', console.error.bind(console, 'Mongoose connection error!'));
-
-// db.once('open', function() {
-//   console.log('Mongoose connection success!');
-// });
-
-// module.exports = db;
+var Album = mongoose.model('Album', albumSchema);
+module.exports = Album;
