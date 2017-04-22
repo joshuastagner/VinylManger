@@ -1,9 +1,15 @@
 import React from 'react';
+import AlbumView from './AlbumView.jsx'
 
-var WantedList = (props) => (
+var AlbumList = (props) => (
   <div>
-    {props.albums}
+    <div>
+      <h3>{props.list}</h3>
+    </div>
+    <div>
+        {props.albums.map( album => <AlbumView album={album} />)}
+    </div>
   </div>
 );
 
-module.exports = WantedList;
+module.exports = AlbumList;

@@ -26,19 +26,28 @@ app.get('/', function(req, res) {
 });
 
 app.post('/db', function(req, res) {
-  console.log(req.body.artist);
   var album = new Album(req.body);
+
+  console.log(req.body);
 
   album.save(function(err, album) {
     if (err) { console.log(err); }
 
-    Album.findOne({artist: req.body.artist}, function(err, album) {
-      if (err) { console.log(err); }
-      console.log('found it!', album);
-    })
+    res.send();
+
   })
 })
 
+app.get('/lists', function(req, res) {
+
+  Album.find({}, function(err, albums) {
+    res.send(albums);
+  })
+});
+
+// Album.remove({}, function(err) {
+//   console.log('removed hopefully!')
+// })
 
 module.exports = app;
 
@@ -73,22 +82,22 @@ var testObj = {artist: 'Radiohead', title: 'Kid A'}
 
 
 
-app.get('/testDataBase', function(req, res) { 
+// app.get('/testDataBase', function(req, res) { 
   
-  var drukqs = new Album({
-    title: 'Drukqs',
-    artist: 'Aphex Twin',
-    year: '2001',
-    have: false
-  }); 
+//   var drukqs = new Album({
+//     title: 'Drukqs',
+//     artist: 'Aphex Twin',
+//     year: '2001',
+//     have: false
+//   }); 
 
 
-  drukqs.save(function(err, album) {
-    if (err) { console.log(err); }
+//   drukqs.save(function(err, album) {
+//     if (err) { console.log(err); }
     
-    Album.findOne({title: album.title}, function(err, album) {
-      if (err) { console.log(err); }
-      res.send(album);
-    })
-  });
-});
+//     Album.findOne({title: album.title}, function(err, album) {
+//       if (err) { console.log(err); }
+//       res.send(album);
+//     })
+//   });
+// });
