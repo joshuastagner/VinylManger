@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Input extends React.Component {
   constructor(props) {
@@ -6,9 +7,22 @@ class Input extends React.Component {
   }
 
   addToOwned () {
-    console.log($('input').val());
+    var input = $('input').val().split(':');
     $('input').val('');
+
+    var sendObj = {
+      artist: input[0],
+      title: input[1]
+    }
+
+    console.log('send obj', sendObj);
+
+    axios.post('/db', sendObj).then(function(response){
+      console.log('response in input.jsx', response);
+    }).catch(function(err) { console.log(err) });
   }
+
+
 
   render () {
     return (

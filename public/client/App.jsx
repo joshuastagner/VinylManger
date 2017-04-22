@@ -11,20 +11,21 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      albums: []
+      albums: [],
+      album: 'Nothing to Display At the Moment'
     }
   }
 
 componentDidMount() {
-  console.log('this from componentDidMount', this)
   axios.get('/testDataBase').then(function(response) {
-    console.log('this form inside .then', this);
-      this.setState({albums: response.data});
+      this.setState({album: response.data.title});
   }.bind(this)); 
 }
 
-  render () {
-    return (
+
+
+render () {
+  return (
       <div>
         <h1>vinylTunes</h1>
         <div>
@@ -37,7 +38,7 @@ componentDidMount() {
           <OwnedList albums={'owned records'} />
         </div>
         <div>
-          <Album album={'Displayed Album'} />
+          <Album album={this.state.album} />
         </div>
       </div>
     )
