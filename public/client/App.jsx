@@ -1,8 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import axios from 'axios';
-import AlbumList from './WantedList.jsx';
-import OwnedList from './OwnedList.jsx';
+import AlbumList from './AlbumList.jsx';
 import Album from './Album.jsx';
 import AddToCollection from './AddToCollection.jsx';
 
@@ -12,8 +11,7 @@ class App extends React.Component {
 
     this.state = {
       OwnedAlbums: [],
-      WantedAlbums: [],
-      // album: ''
+      WantedAlbums: []
     }
   }
 
@@ -21,16 +19,8 @@ componentDidMount() {
   this.fetchListData(); 
 }
 
-addToList (input, bool) {
-    var sendObj = {
-      artist: input[0],
-      title: input[1],
-      have: bool
-    }
-
-    // console.log(sendObj);
-
-    axios.post('/db', sendObj)
+addToList (action, input, bool) {
+    axios.post(action, input)
          .then((response) => { this.fetchListData() })
          .catch(function(err) { console.log(err) });
 
@@ -44,7 +34,6 @@ fetchListData () {
     var WantedAlbums = [];
 
     albums.forEach(function(album) {
-      console.log(album);
       if (album.have) {
         OwnedAlbums.push(album);
       } else {
@@ -68,10 +57,10 @@ render () {
           <AddToCollection addToList={this.addToList.bind(this)}/>
         </div>
         <div>
-          <AlbumList list={'Wanted'} albums={this.state.WantedAlbums} />
+          <AlbumList list={'Wanted'} albums={this.state.WantedAlbums} remove={this.addToList.bind(this)} />
         </div>
         <div>
-          <AlbumList list={'Owned'} albums={this.state.OwnedAlbums} />
+          <AlbumList list={'Owned'} albums={this.state.OwnedAlbums} remove={this.addToList.bind(this)} />
         </div>
         {/*<div>
           <Album album={this.state.album} />

@@ -7,7 +7,7 @@ var AlbumList = (props) => (
       <h3>{props.list}</h3>
     </div>
     <div>
-        {props.albums.map( album => <AlbumView album={album} />)}
+        {props.albums.map( album => <AlbumView album={album} remove={props.remove}/>)}
     </div>
   </div>
 );
