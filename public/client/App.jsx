@@ -20,6 +20,7 @@ componentDidMount() {
 }
 
 addToList (action, input, bool) {
+    console.log(input);
     axios.post(action, input)
          .then((response) => { this.fetchListData() })
          .catch(function(err) { console.log(err) });

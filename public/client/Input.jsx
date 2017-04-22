@@ -7,7 +7,12 @@ class Input extends React.Component {
   }
  
   addToList (input, bool) {
-    this.props.addToList('/db', input, bool);
+    var inputObj = {
+      artist: input[0],
+      title: input[1],
+      have: bool
+    }
+    this.props.addToList('/db', inputObj, bool);
     $('input').val('');
   }
 
