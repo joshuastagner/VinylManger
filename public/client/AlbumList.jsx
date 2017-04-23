@@ -1,5 +1,5 @@
 import React from 'react';
-import AlbumView from './AlbumView.jsx'
+import AlbumSearchView from './AlbumSearchView.jsx'
 
 var AlbumList = (props) => (
   <div>
@@ -7,7 +7,7 @@ var AlbumList = (props) => (
       <h3>{props.list}</h3>
     </div>
     <div>
-        {props.albums.map( album => <AlbumView album={album} remove={props.remove}/>)}
+        {props.albums.map( album => <AlbumSearchView album={album} remove={props.remove} search={props.search}/>)}
     </div>
   </div>
 );

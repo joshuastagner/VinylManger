@@ -19,9 +19,10 @@ class Input extends React.Component {
   render () {
     return (
       <div>
-        <input></input>
-        <div onClick={ () => (this.addToList($('input').val().split(':'), true)) }>Own it</div>
-        <div onClick={ () => (this.addToList($('input').val().split(':'), false)) }>Want it</div>
+        <input className="addTo"></input>
+        <div className="addTo button" onClick={ () => (this.addToList($('input').val().split(':'), true)) }>Own it</div>
+        <div className="addTo button" onClick={ () => (this.addToList($('input').val().split(':'), false)) }>Want it</div>
+        <div className="addTo button" onClick={ () => ( this.props.search($('input').val()) ) }>Search Discogs</div>
       </div>
     )
   }

@@ -13,8 +13,8 @@ class AddToCollection extends React.Component {
   render () {
     return (
       <div>
-        <div onClick={ () => { this.setState({clicked: !this.state.clicked}) } }>Add To Collection</div>
-        {this.state.clicked ? <Input addToList={this.props.addToList} /> : null}
+        <div className="addTo" onClick={ () => { this.setState({clicked: !this.state.clicked}) } }>Add To Collection</div>
+        {this.state.clicked ? <Input addToList={this.props.addToList} search={this.props.search}/> : null}
       </div>
     );
   }
@@ -22,3 +22,4 @@ class AddToCollection extends React.Component {
 
 
 module.exports = AddToCollection;
+
