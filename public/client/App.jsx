@@ -2,8 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import axios from 'axios';
 import AlbumList from './AlbumList.jsx';
-import AlbumSearchList from './AlbumList.jsx';
-import Album from './Album.jsx';
+import AlbumSearchList from './AlbumSearchList.jsx';
 import AddToCollection from './AddToCollection.jsx';
 import ENV from '../../ENV/config.js';
 
@@ -31,6 +30,7 @@ addToList (action, input, bool) {
 }
 
 searchDiscogs (query) {
+  // this logic should not be client side
   var discogs = 'https://api.discogs.com/database/search?q=';
   axios.get(discogs + query + ENV.key + ENV.secret)
        .then( (response) => {
@@ -53,9 +53,14 @@ searchDiscogs (query) {
        } );
 }
 
+clearSearchResults () {
+  this.setState({SearchAlbums: []});
+}
+
 addToDataBase (album, bool) {
-  album[have] = bool;
-  addToList('/db', album);
+  console.log('made it here')
+  album.have = bool;
+  this.addToList('/db', album);
 }
 
 fetchListData () {
@@ -90,17 +95,19 @@ render () {
           />
         </div>
         <div>
-          <AlbumList list={'Results'} albums={this.state.SearchAlbums} search={this.searchDiscogs.bind(this)}/>
+          <AlbumSearchList list={'Results'} 
+                           albums={this.state.SearchAlbums} 
+                           add={this.addToDataBase.bind(this)}
+                           clearSearch={this.clearSearchResults.bind(this)}
+                           
+          />
         </div>
         <div>
           <AlbumList list={'Wanted'} albums={this.state.WantedAlbums} remove={this.addToList.bind(this)} />
         </div>
         <div>
-          <AlbumSearchList list={'Owned'} albums={this.state.OwnedAlbums} add={this.addToDataBase.bind(this)} />
+          <AlbumList list={'Owned'} albums={this.state.OwnedAlbums} remove={this.addToList.bind(this)} />
         </div>
-        {/*<div>
-          <Album album={this.state.album} />
-        </div>*/}
       </div>
     )
   }

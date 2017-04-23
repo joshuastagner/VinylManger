@@ -16,13 +16,18 @@ class Input extends React.Component {
     $('input').val('');
   }
 
+  searchDiscogs (input) {
+    this.props.search(input)
+    $('input').val('');
+  }
+
   render () {
     return (
       <div>
         <input className="addTo"></input>
         <div className="addTo button" onClick={ () => (this.addToList($('input').val().split(':'), true)) }>Own it</div>
         <div className="addTo button" onClick={ () => (this.addToList($('input').val().split(':'), false)) }>Want it</div>
-        <div className="addTo button" onClick={ () => ( this.props.search($('input').val()) ) }>Search Discogs</div>
+        <div className="addTo button" onClick={ () => ( this.searchDiscogs($('input').val()) ) }>Search Discogs</div>
       </div>
     )
   }

@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var path = require('path');
 var db = require('./db/dbconnection.js');
 var Album = require('./db/models/album.js');
-var requestHandler = require('./lib/request-handler.js');
+var ENV = require('./ENV/config.js');
 var assert = require('assert');
 var Promise = require('bluebird');
 var React = require('react');
@@ -29,6 +29,14 @@ app.listen(8080, function() {
 app.get('/', function(req, res) {
   res.render('./public/index');
 });
+
+// app.get('/discogs', function(req, res) {
+//   var discogs = 'https://api.discogs.com/database/search?q=';
+
+//   app.get(discogs + query + ENV.key + ENV.secret, function(req, res) {
+//     res.send()
+//   })
+// });
 
 app.post('/db', function(req, res) {
   var album = new Album(req.body);
@@ -55,3 +63,4 @@ app.post('/remove', function(req, res) {
 })
 
 module.exports = app;
+
